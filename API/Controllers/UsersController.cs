@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseAPIController
     {
         private readonly DataContext _context;
 
@@ -21,13 +22,13 @@ namespace API.Controllers
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public async Task<ActionResult<IEnumerable<AppUser>>> Get()
         {
             return Ok(await _context.Users.ToListAsync());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public async Task<ActionResult<AppUser>> Get(int id)
         {
             return Ok(await _context.Users.FindAsync(id));
