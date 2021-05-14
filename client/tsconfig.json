@@ -14,5 +14,22 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "typeRoots": ["node_modules/@types", "node_modules/@angular", "node_modules/@angular/common/http"]
+  "typeRoots": ["node_modules/@types", "node_modules/@angular", "node_modules/@angular/common/http"],
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es6",
+    "module": "es2020",
+    "lib": [
+      "es2019",
+      "es2018",
+      "dom"
+    ]
+  }
 }
